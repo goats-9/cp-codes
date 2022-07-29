@@ -7,25 +7,41 @@ typedef pair<long long, long long> pll;
 typedef vector<int> vi;
 typedef vector<long long> vll;
 typedef map<int, int> mii;
-#define f(i, a, b, j) for(int i = a; i < b; i = i + j)
+#define f(i, a, b, j) for(int i = (int)a; i < (int)b; i = i + (int)j)
+#define pb push_back
+
+vector<vi> adj;
+int vis[105];
+vi ts;
+
+void topsort(int u) { 
+	vis[u] = 1;
+	f(i, 0, adj[u].size(), 1) { 
+		int v = adj[u][i];
+		if (!vis[v]) topsort(v);
+	}
+	ts.pb(u);
+}
 
 int main() {
-    map<int, vi> dep;
     int n, m, a, b;
     while (cin >> n >> m) {
-        if (!n) break;
-        mii root;
-        vi topo_sort;
-        f(i, 1, n + 1, 1) root[i] = 1;
-        f(i, 0, 1, m) {
-            cin >> a >> b;
-            root[b] = 0;
-            dep[a].push_back(b);
-        }
-        f(i, 1, n + 1, 1) {
-            if (root[i]) topo_sort.push_back(i);
-            int n = dep[a]
-        }
+		if (!n) break;
+		adj.assign(n, {});
+		ts.clear();
+		memset(vis, 0, sizeof(vis));
+		f(i, 0, m, 1) { 
+			cin >> a >> b;
+			adj[a - 1].pb(b - 1);
+		}
+		f(i, 0, n, 1) { 
+			if (!vis[i]) topsort(i);
+		}
+		f(i, 0, n, 1) { 
+			cout << 1 + ts[n - 1 - i];
+			if (i == n - 1) cout << "\n";
+			else cout << " ";
+		}
     }
     return 0;
 }
