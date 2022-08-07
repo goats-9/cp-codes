@@ -3,6 +3,11 @@
 n=${#1}
 p=''
 
+if [[ $n == 0 ]]; then
+	echo Problem number not supplied
+	exit 1
+fi
+
 for (( i = 0 ; i < 5-$n ; i++ ))
 do
 	p=0$p
