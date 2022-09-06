@@ -20,7 +20,7 @@ typedef vector<vector<long long>> vvll;
 #define pb push_back
 #define mp make_pair
 #define reset(a, b) memset(a, int(b), sizeof(a))
-#define MOD (int)1e9 + 7
+#define MOD 1000000007
 
 int main() {
 	int t;
