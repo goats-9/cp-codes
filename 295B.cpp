@@ -21,26 +21,28 @@ typedef vector<vector<long long>> vvll;
 #define mp make_pair
 #define reset(a, b) memset(a, int(b), sizeof(a))
 #define MOD (int)1e9 + 7
-#define N (int)1e5
 
 int main() {
     int n; cin >> n;
-    vi a(n), dp(n, 1), fc(N + 1, -1);
-    f(i, 0, n, 1) cin >> a[i];
-    f(i, 0, n, 1) { 
-        if (a[i] == 1) continue;
-        for (int j = 1; j*j <= a[i]; j++) { 
-            if (a[i]%j == 0) {
-                dp[i] = max(dp[i], 1 + fc[j]);
-                dp[i] = max(dp[i], 1 + fc[a[i]/j]);
+    vvi adj(n, vi(n)), tadj(n, vi(n));
+    vi v(n);
+    f(i, 0, n, 1) f(j, 0, n, 1) cin >> tadj[i][j];
+    f(i, 0, n, 1) {cin >> v[i]; --v[i]; } 
+    reverse(all(v));
+    f(i, 0, n, 1) f(j, 0, n, 1) adj[i][j] = tadj[v[i]][v[j]];
+    vll ans_vec;
+    f(k, 0, n, 1) { 
+        f(i, 0, n, 1) { 
+            f(j, 0, n, 1) { 
+                if (adj[i][k] + adj[k][j] < adj[i][j]) adj[i][j] = adj[i][k] + adj[k][j];
             }
         }
-        for (int j = 1; j*j <= a[i]; j++) { 
-            if (a[i]%j == 0) {
-                if (j > 1) fc[j] = max(fc[j], dp[i]);
-                if (a[i]/j > 1) fc[a[i]/j] = max(fc[a[i]/j], dp[i]);
-            }
-        }
+        ll ans = 0;
+        f(i, 0, k + 1, 1) f(j, 0, k + 1, 1) ans += adj[i][j];
+        ans_vec.pb(ans);
     }
-    sort(all(dp)); cout << dp.back() << nl;
+    reverse(all(ans_vec));
+    for (ll x : ans_vec) cout << x << " ";
+    cout << nl;
+	return 0;
 }

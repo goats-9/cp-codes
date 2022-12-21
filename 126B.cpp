@@ -21,26 +21,28 @@ typedef vector<vector<long long>> vvll;
 #define mp make_pair
 #define reset(a, b) memset(a, int(b), sizeof(a))
 #define MOD (int)1e9 + 7
-#define N (int)1e5
+
+vector<int> prefixFunction(string s) {
+    vector<int> p(s.size());
+    int j = 0;
+    for (int i = 1; i < (int)s.size(); i++) {
+        while (j > 0 && s[j] != s[i])
+            j = p[j-1];
+
+        if (s[j] == s[i])
+            j++;
+        p[i] = j;
+    }   
+    return p;
+}
 
 int main() {
-    int n; cin >> n;
-    vi a(n), dp(n, 1), fc(N + 1, -1);
-    f(i, 0, n, 1) cin >> a[i];
-    f(i, 0, n, 1) { 
-        if (a[i] == 1) continue;
-        for (int j = 1; j*j <= a[i]; j++) { 
-            if (a[i]%j == 0) {
-                dp[i] = max(dp[i], 1 + fc[j]);
-                dp[i] = max(dp[i], 1 + fc[a[i]/j]);
-            }
-        }
-        for (int j = 1; j*j <= a[i]; j++) { 
-            if (a[i]%j == 0) {
-                if (j > 1) fc[j] = max(fc[j], dp[i]);
-                if (a[i]/j > 1) fc[a[i]/j] = max(fc[a[i]/j], dp[i]);
-            }
-        }
-    }
-    sort(all(dp)); cout << dp.back() << nl;
+    string s;
+    cin >> s;
+    vi p = prefixFunction(s);
+    if (p.back() == 0) { cout << "Just a legend\n"; return 0;}
+    f(i, 0, p.size() - 1, 1) if (p[i] == p.back()) {cout << s.substr(0, p[i]) << nl; return 0;}
+    if (p[p.back() - 1] == 0) {cout << "Just a legend\n"; return 0;}
+    cout << s.substr(0, p[p.back() - 1]) << nl; 
+	return 0;
 }
