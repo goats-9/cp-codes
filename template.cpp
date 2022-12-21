@@ -16,6 +16,7 @@ typedef vector<vector<long long>> vvll;
 #define V vector
 #define P pair
 #define all(a) a.begin(), a.end() 
+#define rall(a) a.rbegin(), a.rend() 
 #define nl "\n"
 #define pb push_back
 #define mp make_pair
