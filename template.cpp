@@ -25,7 +25,7 @@ typedef vector<vector<long long>> vvll;
 
 int main() {
 	int t;
-    scanf("%d", &t);
+	cin >> t;
     while (t--) { 
 	
 	}
