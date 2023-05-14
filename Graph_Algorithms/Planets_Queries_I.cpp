@@ -23,12 +23,24 @@ typedef vector<vector<long long>> vvll;
 #define reset(a, b) memset(a, int(b), sizeof(a))
 #define MOD1 (ll)1000000007
 #define MOD2 (ll)998244353
+#define LSOne(s) (s & (-s))
 
 int main() {
-	int t;
-	cin >> t;
-    while (t--) { 
-	
+	int n, q, u, k;
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cin >> n >> q;
+	vvi a(32, vi(n+1));
+	f(i,1,n+1,1) cin >> a[0][i];
+	f(i,1,31,1) f(j,1,n+1,1) a[i][j] = a[i-1][a[i-1][j]];
+	f(i,0,q,1) {
+		cin >> u >> k;
+		int v = u;
+		while (k) {
+			v = a[log2(LSOne(k))][v];
+			k -= LSOne(k);
+		}
+		cout << v << nl;
 	}
 	return 0;
 }
