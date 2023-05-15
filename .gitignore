@@ -1,15 +1,4 @@
 *.out
-<<<<<<< HEAD
-<<<<<<< HEAD
 .cph
 .vscode
-=======
 *.txt
-.cph
-.vscode
->>>>>>> cses-remote/main
-=======
-*.txt
-.cph
-.vscode
->>>>>>> uva-remote/main
