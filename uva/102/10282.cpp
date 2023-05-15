@@ -21,14 +21,19 @@ typedef vector<vector<long long>> vvll;
 #define pb push_back
 #define mp make_pair
 #define reset(a, b) memset(a, int(b), sizeof(a))
-#define MOD1 (ll)1000000007
-#define MOD2 (ll)998244353
+#define MOD (int)1e9 + 7
 
 int main() {
-	int t;
-	cin >> t;
-    while (t--) { 
-	
-	}
-	return 0;
+    string s;
+    M<string, string> dict;
+    while (getline(cin, s) && s != "") {
+        stringstream ss(s);
+        V<string> entr;
+        while (getline(ss, s, ' ')) entr.pb(s);
+        dict[entr[1]] = entr[0];
+    }
+    while (cin >> s) {
+        if (dict.find(s) == dict.end()) cout << "eh\n";
+        else cout << dict[s] << "\n";
+    }
 }
