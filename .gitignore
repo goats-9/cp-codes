@@ -1,3 +1,9 @@
 *.out
+<<<<<<< HEAD
 .cph
 .vscode
+=======
+*.txt
+.cph
+.vscode
+>>>>>>> cses-remote/main
